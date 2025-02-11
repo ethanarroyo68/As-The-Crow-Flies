@@ -1,0 +1,689 @@
+{
+	"info": {
+		"_postman_id": "87002373-ff58-4800-b604-87af8c2abceb",
+		"name": "tour",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_uid": "38359934-87002373-ff58-4800-b604-87af8c2abceb"
+	},
+	"item": [
+		{
+			"name": "base",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "43174f6e-7a99-4066-b067-9a2c47e28bb1",
+						"exec": [
+							"pm.test(\"Response is HTTP200 status\", () => {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"id": "4c6b6507-02bc-4f42-8451-1c4e35c7639a",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"requestType\"    : \"tour\",\n    \"earthRadius\"    : 1,\n    \"response\"       : 0.9,\n    \"places\"         : []\n}\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BASE_URL}}/api/tour",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"api",
+						"tour"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "dampierj: tour-req",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "e0ae41ad-e4a0-4ed1-98af-19bc36ecacbe",
+						"exec": [
+							"pm.test(\"Response is HTTP200 status\", () => {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "d7293237-3679-40d6-812f-b821ccc7c4ef",
+						"exec": [
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"id": "325de1fc-be3c-4458-819d-80a230477e7a",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"requestType\"    : \"tour\",\n    \"earthRadius\"    : 1010.0,\n    \"response\"       : 0.9,\n    \"places\"         : [{\"name\": \"Jester King Brewery\", \"municipality\": \"Austin\", \"region\": \"Texas\", \"country\": \"United States\", \"latitude\": \"30.23129467\", \"longitude\": \"-97.99956818\"},\n                        {\"name\": \"Outfit Brewing\", \"municipality\": \"Dallas\", \"region\": \"Texas\", \"country\": \"United States\", \"latitude\": \"32.815911\", \"longitude\": \"-96.869817\"},\n                        {\"name\": \"Vista Brewing\", \"municipality\": \"Driftwood\", \"region\": \"Texas\", \"country\": \"United States\", \"latitude\": \"30.10496\", \"longitude\": \"-98.02185\"},\n                        {\"name\": \"Old Texas Brewing Co\", \"municipality\": \"Fort Worth\", \"region\": \"Texas\", \"country\": \"United States\", \"latitude\": \"32.72623798446809\", \"longitude\": \"-97.4184693892572\"},\n                        {\"name\": \"New Glarus Brewing Company\", \"municipality\": \"New Glarus\", \"region\": \"Wisconsin\", \"country\": \"United States\", \"latitude\": \"42.794497\", \"longitude\": \"-89.632386\"},\n                        {\"name\": \"Blackfoot River Brewing Co\", \"municipality\": \"Helena\", \"region\": \"Montana\", \"country\": \"United States\", \"latitude\": \"46.5863\", \"longitude\": \"-112.0418\"},\n                        {\"name\": \"SunRift Beer Company\", \"municipality\": \"Kalispell\", \"region\": \"Montana\", \"country\": \"United States\", \"latitude\": \"48.120012\", \"longitude\": \"-114.185602\"},\n                        {\"name\": \"Able Baker Brewing Co\", \"municipality\": \"Las Vegas\", \"region\": \"Nevada\", \"country\": \"United States\", \"latitude\": \"36.1699\", \"longitude\": \"-115.1398\"},\n                        {\"name\": \"Other Half Brewing\", \"municipality\": \"New York\", \"region\": \"New York\", \"country\": \"United States\", \"latitude\": \"40.4527\", \"longitude\": \"-73.5843\"},\n                        {\"name\": \"Rockaway Brewing Company\", \"municipality\": \"Queens\", \"region\": \"New York\", \"country\": \"United States\", \"latitude\": \"40.74718\", \"longitude\": \"-73.95493\"}]\n}\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BASE_URL}}/api/tour",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"api",
+						"tour"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "c835266433_bestTourTest",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "ea073299-1553-4f4f-b12f-e29c7d959686",
+						"exec": [
+							"//this test was provided by zey (github user)\r",
+							"pm.test(\"Response is HTTP200 status\", () => {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"id": "e83a1aab-e2b9-4c0c-92fa-d534a1413998",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"requestType\": \"tour\",\r\n  \"earthRadius\": 117343.07,\r\n  \"response\": 0.6283185307179586,\r\n  \"places\": [\r\n    {\"name\": \"Eiffel Tower\", \"municipality\": \"Paris\", \"region\": \"Île-de-France\", \"country\": \"France\", \"latitude\": \"48.8584\", \"longitude\": \"2.2945\"},\r\n    {\"name\": \"Central Park\", \"municipality\": \"New York City\", \"region\": \"New York\", \"country\": \"United States\", \"latitude\": \"40.7829\", \"longitude\": \"-73.9654\"},\r\n    {\"name\": \"Great Wall of China\", \"municipality\": \"Beijing\", \"region\": \"Beijing\", \"country\": \"China\", \"latitude\": \"40.4319\", \"longitude\": \"116.5704\"},\r\n    {\"name\": \"Sydney Opera House\", \"municipality\": \"Sydney\", \"region\": \"New South Wales\", \"country\": \"Australia\", \"latitude\": \"-33.8568\", \"longitude\": \"151.2153\"},\r\n    {\"name\": \"Christ the Redeemer\", \"municipality\": \"Rio de Janeiro\", \"region\": \"Rio de Janeiro\", \"country\": \"Brazil\", \"latitude\": \"-22.9519\", \"longitude\": \"-43.2105\"},\r\n    {\"name\": \"Taj Mahal\", \"municipality\": \"Agra\", \"region\": \"Uttar Pradesh\", \"country\": \"India\", \"latitude\": \"27.1751\", \"longitude\": \"78.0421\"},\r\n    {\"name\": \"Pyramids of Giza\", \"municipality\": \"Giza\", \"region\": \"Giza Governorate\", \"country\": \"Egypt\", \"latitude\": \"29.9792\", \"longitude\": \"31.1342\"},\r\n    {\"name\": \"Burj Khalifa\", \"municipality\": \"Dubai\", \"region\": \"Dubai\", \"country\": \"United Arab Emirates\", \"latitude\": \"25.1971\", \"longitude\": \"55.2742\"},\r\n    {\"name\": \"Colosseum\", \"municipality\": \"Rome\", \"region\": \"Lazio\", \"country\": \"Italy\", \"latitude\": \"41.8902\", \"longitude\": \"12.4922\"},\r\n    {\"name\": \"Angkor Wat\", \"municipality\": \"Siem Reap\", \"region\": \"Siem Reap Province\", \"country\": \"Cambodia\", \"latitude\": \"13.4125\", \"longitude\": \"103.8670\"},\r\n    {\"name\": \"Golden Gate Bridge\", \"municipality\": \"San Francisco\", \"region\": \"California\", \"country\": \"United States\", \"latitude\": \"37.8199\", \"longitude\": \"-122.4783\"},\r\n    {\"name\": \"Burj Khalifa\", \"municipality\": \"Dubai\", \"region\": \"Dubai\", \"country\": \"United Arab Emirates\", \"latitude\": \"25.1971\", \"longitude\": \"55.2742\"}\r\n  ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BASE_URL}}/api/tour",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"api",
+						"tour"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "c835266433_badFormulaInTourReq",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "ea073299-1553-4f4f-b12f-e29c7d959686",
+						"exec": [
+							"pm.test(\"Response is HTTP400 status\", () => {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"id": "07216431-e244-4d67-ad16-189a6b993aba",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"requestType\": \"tour\",\r\n    \"earthRadius\": 3959,\r\n    \"response\": 0.3,\r\n    \"formula\": \"Some formula\",\r\n    \"places\": [\r\n        {\r\n            \"name\": \"Tallulah Brewing Company\",\r\n            \"municipality\": \"Jasper\",\r\n            \"region\": \"Alabama\",\r\n            \"country\": \"United States\",\r\n            \"latitude\": \"33.83571\",\r\n            \"longitude\": \"-87.27746\"\r\n        },\r\n        {\r\n            \"name\": \"Madison Taproom\",\r\n            \"municipality\": \"Madison\",\r\n            \"region\": \"Alabama\",\r\n            \"country\": \"United States\",\r\n            \"latitude\": \"34.756575\",\r\n            \"longitude\": \"-86.724926\"\r\n        },\r\n        {\r\n            \"name\": \"Mother Road Brewing Company\",\r\n            \"municipality\": \"Flagstaff\",\r\n            \"region\": \"Arizona\",\r\n            \"country\": \"United States\",\r\n            \"latitude\": \"35.19704\",\r\n            \"longitude\": \"-111.65206\"\r\n        },\r\n        {\r\n            \"name\": \"Arizona Wilderness Gilbert Brewpub\",\r\n            \"municipality\": \"Gilbert\",\r\n            \"region\": \"Arizona\",\r\n            \"country\": \"United States\",\r\n            \"latitude\": \"33.362778\",\r\n            \"longitude\": \"-111.840833\"\r\n        },\r\n        {\r\n            \"name\": \"260 Brewery & Distillery\",\r\n            \"municipality\": \"Heber\",\r\n            \"region\": \"Arizona\",\r\n            \"country\": \"United States\",\r\n            \"latitude\": \"34.3901635\",\r\n            \"longitude\": \"-110.5384288\"\r\n        },\r\n        {\r\n            \"name\": \"Phantom Fox Beer Company\",\r\n            \"municipality\": \"Mesa\",\r\n            \"region\": \"Arizona\",\r\n            \"country\": \"United States\",\r\n            \"latitude\": \"33.4153928\",\r\n            \"longitude\": \"-111.8359116\"\r\n        },\r\n        {\r\n            \"name\": \"Superstition Meadery\",\r\n            \"municipality\": \"Prescott\",\r\n            \"region\": \"Arizona\",\r\n            \"country\": \"United States\",\r\n            \"latitude\": \"34.54235167823596\",\r\n            \"longitude\": \"-112.46950867485202\"\r\n        },\r\n        {\r\n            \"name\": \"Goldwater Brewing Co.\",\r\n            \"municipality\": \"Scottsdale\",\r\n            \"region\": \"Arizona\",\r\n            \"country\": \"United States\",\r\n            \"latitude\": \"33.489798\",\r\n            \"longitude\": \"-111.926375\"\r\n        },\r\n        {\r\n            \"name\": \"Oak Creek Brewing Co.\",\r\n            \"municipality\": \"Sedona\",\r\n            \"region\": \"Arizona\",\r\n            \"country\": \"United States\",\r\n            \"latitude\": \"34.9702529\",\r\n            \"longitude\": \"-111.8385239\"\r\n        }\r\n    ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BASE_URL}}/api/tour",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"api",
+						"tour"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "mboin: tour-no-time",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "ea073299-1553-4f4f-b12f-e29c7d959686",
+						"exec": [
+							"//this test was provided by zey (github user)\r",
+							"pm.test(\"Response is HTTP200 status\", () => {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"id": "4809de67-510d-4682-9fcc-6e2d672a7d49",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"requestType\": \"tour\",\r\n  \"earthRadius\": 6738,\r\n  \"response\": 0,\r\n  \"places\": [\r\n    {\"name\": \"San Francisco\", \"municipality\": \"San Francisco\", \"region\": \"California\", \"country\": \"United States\", \"latitude\": \"37.7749\", \"longitude\": \"-122.4194\"},\r\n    {\"name\": \"Fort Collins\", \"municipality\": \"Fort Collins\", \"region\": \"Colorado\", \"country\": \"United States\", \"latitude\": \"40.5853\", \"longitude\": \"-105.0844\"},\r\n    {\"name\": \"San Jose\", \"municipality\": \"San Jose\", \"region\": \"California\", \"country\": \"United States\", \"latitude\": \"37.3382\", \"longitude\": \"-121.8863\"},\r\n    {\"name\": \"Denver\", \"municipality\": \"Denver\", \"region\": \"Colorado\", \"country\": \"United States\", \"latitude\": \"39.7392\", \"longitude\": \"-104.9903\"}\r\n  ]\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BASE_URL}}/api/tour",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"api",
+						"tour"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "mboin: tour-best",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "ea073299-1553-4f4f-b12f-e29c7d959686",
+						"exec": [
+							"//this test was provided by zey (github user)\r",
+							"pm.test(\"Response is HTTP200 status\", () => {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"id": "554515e2-f336-49cc-a6b3-a6a32b0c9b8c",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"requestType\": \"tour\",\r\n  \"earthRadius\": 6378,\r\n  \"response\": 0.8,\r\n  \"places\": [\r\n    {\"name\": \"San Francisco\", \"municipality\": \"San Francisco\", \"region\": \"California\", \"country\": \"United States\", \"latitude\": \"37.7749\", \"longitude\": \"-122.4194\"},\r\n    {\"name\": \"Fort Collins\", \"municipality\": \"Fort Collins\", \"region\": \"Colorado\", \"country\": \"United States\", \"latitude\": \"40.5853\", \"longitude\": \"-105.0844\"},\r\n    {\"name\": \"San Jose\", \"municipality\": \"San Jose\", \"region\": \"California\", \"country\": \"United States\", \"latitude\": \"37.3382\", \"longitude\": \"-121.8863\"},\r\n    {\"name\": \"Denver\", \"municipality\": \"Denver\", \"region\": \"Colorado\", \"country\": \"United States\", \"latitude\": \"39.7392\", \"longitude\": \"-104.9903\"}\r\n  ]\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BASE_URL}}/api/tour",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"api",
+						"tour"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "quintenr: tour",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "efe1cbf8-a2b6-4ee8-aa4a-f971504f6b1d",
+						"exec": [
+							"pm.test(\"Response is HTTP200 status\", () => {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"id": "48e6a037-5110-431f-a3ec-42ba8978c386",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"requestType\" : \"tour\",\r\n    \"earthRadius\" : 7777.0,\r\n    \"response\"    : 0.7,\r\n    \"places\"      : [\r\n\t\t{\"name\": \"Three Barrel Brewing Company\", \"municipality\": \"Del Norte\", \"region\": \"Colorado\", \"country\": \"United States\", \"latitude\": \"37.678634\", \"longitude\": \"-106.356872\"},\r\n\t\t{\"name\": \"Craft Mountain Brewing Company\", \"municipality\": \"Bailey\", \"region\": \"Colorado\", \"country\": \"United States\", \"latitude\": \"39.406389\", \"longitude\": \"-105.476944\"},\r\n\t\t{\"name\": \"The Colorado Farm Brewery\", \"municipality\": \"Alamosa\", \"region\": \"Colorado\", \"country\": \"United States\", \"latitude\": \"37.400003\", \"longitude\": \"-106.001005\"},\r\n\t\t{\"name\": \"Avant Garde Aleworks\", \"municipality\": \"Estes Park\", \"region\": \"Colorado\", \"country\": \"United States\", \"latitude\": \"40.372901\", \"longitude\": \"-105.508539\"},\r\n\t\t{\"name\": \"Craftsman Brew Co\", \"municipality\": \"Edwards\", \"region\": \"Colorado\", \"country\": \"United States\", \"latitude\": \"39.643729\", \"longitude\": \"-106.594339\"},\r\n\t\t{\"name\": \"Soulcraft Brewing\", \"municipality\": \"Salida\", \"region\": \"Colorado\", \"country\": \"United States\", \"latitude\": \"38.524563\", \"longitude\": \"-106.006339\"},\r\n\t\t{\"name\": \"The Eldo Brewery and Taproom\", \"municipality\": \"Crested Butte\", \"region\": \"Colorado\", \"country\": \"United States\", \"latitude\": \"38.86999\", \"longitude\": \"-106.98679\"},\r\n\t\t{\"name\": \"The Noble Buck\", \"municipality\": \"Winter Park\", \"region\": \"Colorado\", \"country\": \"United States\", \"latitude\": \"39.92386\", \"longitude\": \"-105.78644\"}\r\n\t]             \r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BASE_URL}}/api/tour",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"api",
+						"tour"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "c836926049: 2_Place_Tour",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"//verify that the response status is 200 or a relevant error status (e.g., 400 if an error is expected)\r",
+							"pm.test(\"Response has appropriate HTTP status\", () => {\r",
+							"    pm.expect(pm.response.code).to.be.oneOf([200, 400]);\r",
+							"});\r",
+							"\r",
+							"//define the expected response structure when only two places are provided\r",
+							"const expectedOrder = [\r",
+							"    { \"name\": \"Eiffel Tower Experience\", \"municipality\": \"Las Vegas\", \"region\": \"Nevada\", \"country\": \"United States\", \"latitude\": \"36.1126\", \"longitude\": \"-115.1728\" },\r",
+							"    { \"name\": \"Eiffel Tower\", \"municipality\": \"Paris\", \"region\": \"Île-de-France\", \"country\": \"France\", \"latitude\": \"48.8584\", \"longitude\": \"2.2945\" }\r",
+							"];\r",
+							"\r",
+							"//check if error is returned for having fewer than three places\r",
+							"pm.test(\"Handles tours with fewer than three places\", () => {\r",
+							"    const responseData = pm.response.json();\r",
+							"    \r",
+							"    //if error due to less than 3 places, validate error message\r",
+							"    if (responseData.error) \r",
+							"    {\r",
+							"        pm.expect(responseData.error).to.be.a(\"string\");\r",
+							"        pm.expect(responseData.error.toLowerCase()).to.include(\"less than three places\"); \r",
+							"\r",
+							"    //if a response with places is returned, validate it\r",
+							"    }\r",
+							"     else \r",
+							"    {\r",
+							"        pm.expect(responseData.places).to.eql(expectedOrder);\r",
+							"        pm.expect(responseData.earthRadius).to.eql(6666.0);\r",
+							"        pm.expect(responseData.response).to.eql(0.8);\r",
+							"        pm.expect(responseData.requestType).to.eql(\"tour\");\r",
+							"    }\r",
+							"});\r",
+							"\r",
+							"//check that earthRadius value is correct\r",
+							"pm.test(\"Response has correct earthRadius\", () => {\r",
+							"    const responseData = pm.response.json();\r",
+							"    pm.expect(responseData.earthRadius).to.eql(6666.0);\r",
+							"});\r",
+							"\r",
+							"//check  response value is correct\r",
+							"pm.test(\"Response has correct response value\", () => {\r",
+							"    const responseData = pm.response.json();\r",
+							"    pm.expect(responseData.response).to.eql(0.8);\r",
+							"});\r",
+							"\r",
+							"//confirm the requestType is correct\r",
+							"pm.test(\"Response has correct requestType\", () => {\r",
+							"    const responseData = pm.response.json();\r",
+							"    pm.expect(responseData.requestType).to.eql(\"tour\");\r",
+							"});\r",
+							"\r",
+							"//verify response matches the expected order exactly \r",
+							"pm.test(\"Response matches expected order exactly\", () => {\r",
+							"    const responseData = pm.response.json();\r",
+							"    if (!responseData.error && responseData.places) \r",
+							"    {\r",
+							"        pm.expect(responseData.places).to.eql(expectedOrder);\r",
+							"    }\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"id": "882e01e5-1944-4858-a5f5-b4e58dc2217f",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"requestType\": \"tour\",\r\n    \"earthRadius\": 6666.0,\r\n    \"response\": 0.8,\r\n    \"places\": [\r\n        { \"name\": \"Eiffel Tower Experience\", \"municipality\": \"Las Vegas\", \"region\": \"Nevada\", \"country\": \"United States\", \"latitude\": \"36.1126\", \"longitude\": \"-115.1728\" },\r\n        { \"name\": \"Eiffel Tower\", \"municipality\": \"Paris\", \"region\": \"Île-de-France\", \"country\": \"France\", \"latitude\": \"48.8584\", \"longitude\": \"2.2945\" }\r\n    ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BASE_URL}}/api/tour",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"api",
+						"tour"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "quintenr: OutOfBoundsTest",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "23c92ce5-ea9b-489c-a2f0-45939439fbff",
+						"exec": [
+							"pm.test(\"Response is HTTP400 status\", () => {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Place has invalid latitude or longitude\", () => {\r",
+							"    const data = pm.response.json();\r",
+							"    data.places.forEach(place => {\r",
+							"        const latInvalid = /^[-+]?(?:90(?:.0+)?|(?:[0-9]|[1-8][0-9])(?:.[0-9]+)?)$/;\r",
+							"        pm.expect(place.latitude.match(latInvalid))\r",
+							"\r",
+							"        const longInvalid = /^[-+]?(?:180(?:.0+)?|(?:[0-9]|[1-9][0-9]|1[0-7][0-9])(?:.[0-9]+)?)$/;\r",
+							"        pm.expect(place.longitude.match(longInvalid))\r",
+							"    });\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Response body is not empty\", () => {\r",
+							"    pm.expect(pm.response.text()).to.not.be.empty;\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"id": "810e9eb9-7fc3-4a64-9950-7fccb7ab9bb2",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"requestType\": \"tour\",\r\n    \"earthRadius\": 6371.0,\r\n    \"response\": 0.5,\r\n    \"places\": [\r\n        {\r\n            \"name\": \"Test Place\",\r\n            \"municipality\": \"Test Muni\",\r\n            \"region\": \"Test Region\",\r\n            \"country\": \"Test Country\",\r\n            \"latitude\": \"91.0\",\r\n            \"longitude\": \"183.0\"\r\n        },\r\n        {\r\n            \"name\": \"Test Place 2\",\r\n            \"municipality\": \"Test Muni\",\r\n            \"region\": \"Test Region\",\r\n            \"country\": \"Test Country\",\r\n            \"latitude\": \"-97.0\",\r\n            \"longitude\": \"-180.0\"\r\n        }\r\n    ]\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BASE_URL}}/api/tour",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"api",
+						"tour"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "c836926049: tour poles edge case",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// Verify that the response status is 200 or a relevant error status (e.g., 400 if an error is expected)\r",
+							"pm.test(\"Response has appropriate HTTP status\", () => {\r",
+							"    pm.expect(pm.response.code).to.be.oneOf([200, 400]);\r",
+							"});\r",
+							"\r",
+							"// Define the expected response structure when two places are the North and South Poles\r",
+							"const expectedOrder = [\r",
+							"    { \"name\": \"North Pole\", \"municipality\": \"None\", \"region\": \"Arctic\", \"country\": \"None\", \"latitude\": \"90.0000\", \"longitude\": \"0.0000\" },\r",
+							"    { \"name\": \"South Pole\", \"municipality\": \"None\", \"region\": \"Antarctica\", \"country\": \"None\", \"latitude\": \"-90.0000\", \"longitude\": \"0.0000\" }\r",
+							"];\r",
+							"\r",
+							"// Check if error is returned for having fewer than three places\r",
+							"pm.test(\"Handles tours with fewer than three places\", () => {\r",
+							"    const responseData = pm.response.json();\r",
+							"    \r",
+							"    // If error due to less than 3 places, validate error message\r",
+							"    if (responseData.error) {\r",
+							"        pm.expect(responseData.error).to.be.a(\"string\");\r",
+							"        pm.expect(responseData.error.toLowerCase()).to.include(\"less than three places\"); \r",
+							"\r",
+							"    // If a response with places is returned, validate it\r",
+							"    } else {\r",
+							"        pm.expect(responseData.places).to.eql(expectedOrder);\r",
+							"        pm.expect(responseData.earthRadius).to.eql(6371.0); // Updated earthRadius for this test\r",
+							"        pm.expect(responseData.response).to.eql(0.8);\r",
+							"        pm.expect(responseData.requestType).to.eql(\"tour\");\r",
+							"    }\r",
+							"});\r",
+							"\r",
+							"// Check that earthRadius value is correct\r",
+							"pm.test(\"Response has correct earthRadius\", () => {\r",
+							"    const responseData = pm.response.json();\r",
+							"    pm.expect(responseData.earthRadius).to.eql(6371.0); // Updated for this test\r",
+							"});\r",
+							"\r",
+							"// Check response value is correct\r",
+							"pm.test(\"Response has correct response value\", () => {\r",
+							"    const responseData = pm.response.json();\r",
+							"    pm.expect(responseData.response).to.eql(0.8);\r",
+							"});\r",
+							"\r",
+							"// Confirm the requestType is correct\r",
+							"pm.test(\"Response has correct requestType\", () => {\r",
+							"    const responseData = pm.response.json();\r",
+							"    pm.expect(responseData.requestType).to.eql(\"tour\");\r",
+							"});\r",
+							"\r",
+							"// Verify that the response correctly handles places with municipality and country set to \"None\"\r",
+							"pm.test(\"Handles municipality and country of 'None'\", () => {\r",
+							"    const responseData = pm.response.json();\r",
+							"\r",
+							"    // Check that all places in the response have correct municipality and country\r",
+							"    if (responseData.places && Array.isArray(responseData.places)) {\r",
+							"        responseData.places.forEach(place => {\r",
+							"            if (place.name === \"North Pole\" || place.name === \"South Pole\") {\r",
+							"                pm.expect(place.municipality).to.eql(\"None\");\r",
+							"                pm.expect(place.country).to.eql(\"None\");\r",
+							"            }\r",
+							"        });\r",
+							"    } else {\r",
+							"        pm.fail(\"Response does not include a valid 'places' array\");\r",
+							"    }\r",
+							"});\r",
+							"\r",
+							"\r",
+							"// Verify response matches the expected order exactly\r",
+							"pm.test(\"Response matches expected order exactly\", () => {\r",
+							"    const responseData = pm.response.json();\r",
+							"    if (!responseData.error && responseData.places) {\r",
+							"        pm.expect(responseData.places).to.eql(expectedOrder);\r",
+							"    }\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"id": "e7d43c06-d19a-4220-9d6e-fb6f0c8c4874",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"requestType\": \"tour\",\r\n    \"earthRadius\": 6371.0,\r\n    \"response\": 0.8,\r\n    \"places\": [\r\n        { \r\n            \"name\": \"North Pole\", \r\n            \"municipality\": \"None\", \r\n            \"region\": \"Arctic\", \r\n            \"country\": \"None\", \r\n            \"latitude\": \"90.0000\", \r\n            \"longitude\": \"0.0000\" \r\n        },\r\n        { \r\n            \"name\": \"South Pole\", \r\n            \"municipality\": \"None\", \r\n            \"region\": \"Antarctica\", \r\n            \"country\": \"None\", \r\n            \"latitude\": \"-90.0000\", \r\n            \"longitude\": \"0.0000\" \r\n        }\r\n    ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BASE_URL}}/api/tour",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"api",
+						"tour"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "quintenr: highResponseTest",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "2d853d25-b1f4-4036-a1b7-51624daf599e",
+						"exec": [
+							"pm.test(\"Response is HTTP 200 status\", () => {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"pm.test(\"Response time less than 2000ms\", () => {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(2000);\r",
+							"});\r",
+							"pm.test(\"Response time does not exceed limit\", () => {\r",
+							"    let data = {};\r",
+							"    if (pm.request.body) {\r",
+							"        data = JSON.parse(pm.request.body.raw);\r",
+							"    }\r",
+							"    if (data.response) {\r",
+							"        pm.expect(pm.response.responseTime / 1000).to.be.below(data.response, \"Response time exceeded the limit\");\r",
+							"    }\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"id": "0a438a24-24ca-46da-903b-3c216e2aea5d",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"requestType\": \"tour\",\r\n  \"earthRadius\": 6371,\r\n  \"response\": 1000000,\r\n  \"formula\": \"haversine\",\r\n  \"places\": [\r\n    { \"latitude\": \"0.0\", \"longitude\": \"0.0\" },\r\n    { \"latitude\": \"45.0\", \"longitude\": \"90.0\" }\r\n  ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BASE_URL}}/api/tour",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"api",
+						"tour"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

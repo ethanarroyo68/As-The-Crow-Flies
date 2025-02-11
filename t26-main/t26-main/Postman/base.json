@@ -1,0 +1,100 @@
+{
+	"info": {
+		"_postman_id": "5415f446-01d0-4415-9e25-4bf9cf5229b8",
+		"name": "314-api-tests",
+		"description": "This collection contains tests for the various API requests in the CS314 webapp.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_uid": "38359934-5415f446-01d0-4415-9e25-4bf9cf5229b8"
+	},
+	"item": [
+		{
+			"name": "config",
+			"item": [
+				{
+					"name": "Config Post",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "35228089-86da-4b33-95ba-5ddc342ae11b",
+								"exec": [
+									"pm.test(\"Response is HTTP200 status\", () => {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Server-side team name is correct\", () => {",
+									"    const response = pm.response.json();",
+									"    const expectedTeamName = pm.collectionVariables.get(\"TEAM_NAME\");",
+									"    pm.expect(response.serverName).to.eql(expectedTeamName);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"id": "47a09f60-bfa4-4abf-8ec9-39a027691ddc",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"requestType\": \"config\",\n    \"features\": [\"config\"] \n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/api/config",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"api",
+								"config"
+							]
+						},
+						"description": "Testing the result of Config Post requests."
+					},
+					"response": []
+				}
+			],
+			"id": "5cc7f5db-5676-4603-9c97-a979cc2dc8fa"
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "9010ca8f-1557-46b9-bedc-810082b580e9",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "afe8b939-2bcf-45be-a510-b933089b6988",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"id": "22c08a32-9998-468c-85d7-69413301b916",
+			"key": "BASE_URL",
+			"value": "http://localhost:8000"
+		},
+		{
+			"id": "5f2ce70e-9dbb-408b-8a9a-b178e433aa18",
+			"key": "TEAM_NAME",
+			"value": "t26 Works On MY Machine"
+		}
+	]
+}

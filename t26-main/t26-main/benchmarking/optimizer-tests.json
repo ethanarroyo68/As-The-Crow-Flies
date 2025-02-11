@@ -1,0 +1,102 @@
+{
+	"info": {
+		"_postman_id": "201a5d27-c69e-4891-91f6-511b9b7a266b",
+		"name": "optimizer-tests",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_uid": "38157129-201a5d27-c69e-4891-91f6-511b9b7a266b"
+	},
+	"item": [
+		{
+			"name": "c835266433-3opt-N=10",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "df5f2ba7-dc74-42ac-87d7-b9b3074e82d1",
+						"exec": [
+							"// WARNING: THIS TEST WILL FAIL\r",
+							"// Currently working on improving 3opt to make it usable\r",
+							"// Algorithm 3 response time tracking\r",
+							"let currentResponseTime3 = pm.response.responseTime;\r",
+							"let responseTimes3 = pm.collectionVariables.get(\"responseTimes3\");\r",
+							"\r",
+							"if (!responseTimes3) {\r",
+							"    responseTimes3 = [];\r",
+							"} else {\r",
+							"    responseTimes3 = JSON.parse(responseTimes3);\r",
+							"}\r",
+							"\r",
+							"responseTimes3.push(currentResponseTime3);\r",
+							"pm.collectionVariables.set(\"responseTimes3\", JSON.stringify(responseTimes3));\r",
+							"\r",
+							"// Calculate the average response time\r",
+							"let total3 = responseTimes3.reduce((acc, time) => acc + time, 0);\r",
+							"let average3 = total3 / responseTimes3.length;\r",
+							"\r",
+							"// Calculate the maximum response time\r",
+							"let max3 = Math.max(...responseTimes3);\r",
+							"\r",
+							"console.log(\"Algorithm 3 - Current response time: \" + currentResponseTime3 + \" ms\");\r",
+							"console.log(\"Algorithm 3 - Average response time: \" + average3 + \" ms\");\r",
+							"console.log(\"Algorithm 3 - Maximum response time: \" + max3 + \" ms\");\r",
+							"\r",
+							"// Test to check if the maximum response time is under the benchmark\r",
+							"pm.test(\"Algorithm 3 - Maximum response time is under benchmark\", function () {\r",
+							"    const benchmarkTime3 = 500; // Example benchmark for Algorithm 3\r",
+							"    pm.expect(max3).to.be.below(benchmarkTime3);\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"id": "fd646eaf-65dd-4fb7-8873-c0285c9f7d61",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"earthRadius\": 6378.0,\r\n\"requestType\": \"tour\",\r\n\"response\": 1.0,\r\n\"places\": [\r\n  {\r\n  \"name\": \"Magic Elixir\",\r\n  \"municipality\": \"Magic Meadows\",\r\n  \"region\": \"Neverland\",\r\n  \"country\": \"Neverland\",\r\n  \"latitude\": \"-13.073541\",\r\n  \"longitude\": \"-168.915727\"\r\n},\r\n  {\r\n  \"name\": \"Neverland Suds\",\r\n  \"municipality\": \"Magic Meadows\",\r\n  \"region\": \"Fictional\",\r\n  \"country\": \"Neverland\",\r\n  \"latitude\": \"-45.652481\",\r\n  \"longitude\": \"-10.396873\"\r\n},\r\n  {\r\n  \"name\": \"Whimsical Wines\",\r\n  \"municipality\": \"Wonderland\",\r\n  \"region\": \"Mystical Lands\",\r\n  \"country\": \"Neverland\",\r\n  \"latitude\": \"45.647726\",\r\n  \"longitude\": \"75.788701\"\r\n},\r\n  {\r\n  \"name\": \"Enchanted Spirits\",\r\n  \"municipality\": \"Frolicking Fields\",\r\n  \"region\": \"Elysium\",\r\n  \"country\": \"Neverland\",\r\n  \"latitude\": \"-37.818617\",\r\n  \"longitude\": \"-45.679409\"\r\n},\r\n  {\r\n  \"name\": \"Whimsical Wines\",\r\n  \"municipality\": \"Fantasia\",\r\n  \"region\": \"Mystical Lands\",\r\n  \"country\": \"Neverland\",\r\n  \"latitude\": \"20.386906\",\r\n  \"longitude\": \"-107.862362\"\r\n},\r\n  {\r\n  \"name\": \"Mystic Ales\",\r\n  \"municipality\": \"Fantasia\",\r\n  \"region\": \"Neverland\",\r\n  \"country\": \"Neverland\",\r\n  \"latitude\": \"-35.859582\",\r\n  \"longitude\": \"10.634860\"\r\n},\r\n  {\r\n  \"name\": \"Whimsical Wines\",\r\n  \"municipality\": \"Dreamsville\",\r\n  \"region\": \"Dreamworld\",\r\n  \"country\": \"Neverland\",\r\n  \"latitude\": \"32.520156\",\r\n  \"longitude\": \"91.284874\"\r\n},\r\n  {\r\n  \"name\": \"Whimsical Wines\",\r\n  \"municipality\": \"Joyville\",\r\n  \"region\": \"Neverland\",\r\n  \"country\": \"Neverland\",\r\n  \"latitude\": \"-28.144089\",\r\n  \"longitude\": \"-137.255254\"\r\n},\r\n  {\r\n  \"name\": \"Magic Elixir\",\r\n  \"municipality\": \"Wonderland\",\r\n  \"region\": \"Dreamworld\",\r\n  \"country\": \"Neverland\",\r\n  \"latitude\": \"-43.070663\",\r\n  \"longitude\": \"-125.503960\"\r\n},\r\n  {\r\n  \"name\": \"Mystic Ales\",\r\n  \"municipality\": \"Adventure Bay\",\r\n  \"region\": \"Mystical Lands\",\r\n  \"country\": \"Neverland\",\r\n  \"latitude\": \"53.516363\",\r\n  \"longitude\": \"92.004478\"\r\n}\r\n]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BASE_URL}}/api/tour",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"api",
+						"tour"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"variable": [
+		{
+			"id": "b5ec254d-9979-4a64-bae9-37bf9fb14e0a",
+			"key": "responseTimes1",
+			"value": ""
+		},
+		{
+			"id": "74d23c74-8971-47e1-8d59-1980bcff602c",
+			"key": "responseTimes2",
+			"value": ""
+		},
+		{
+			"id": "10f3a8c9-7156-439d-af72-19d8414abb9f",
+			"key": "responseTimes3",
+			"value": ""
+		}
+	]
+}

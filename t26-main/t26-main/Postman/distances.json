@@ -1,0 +1,1009 @@
+{
+	"info": {
+		"_postman_id": "1f73e28b-adc0-4947-9422-61c6e0b388b0",
+		"name": "distances",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_uid": "38359934-1f73e28b-adc0-4947-9422-61c6e0b388b0"
+	},
+	"item": [
+		{
+			"name": "base",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "202ea63f-31a9-424a-92ac-ef7a10f01c96",
+						"exec": [
+							"pm.test(\"Response is HTTP200 status\", () => {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"id": "29e9afa1-c86c-4e6a-828f-071e515e7e1b",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"requestType\": \"distances\",\n    \"places\": [],\n    \"earthRadius\": 1\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BASE_URL}}/api/distances",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"api",
+						"distances"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "dampierj: TestHaversineCalc",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "202ea63f-31a9-424a-92ac-ef7a10f01c96",
+						"exec": [
+							"// Parse the response JSON",
+							"let response = pm.response.json();",
+							"",
+							"// Test if response status is 200",
+							"pm.test(\"Response status is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"// Test if response has the correct requestType",
+							"pm.test(\"Request type is distances\", function () {",
+							"    pm.expect(response.requestType).to.eql(\"distances\");",
+							"});",
+							"",
+							"// Test if the correct places are returned",
+							"pm.test(\"Places match the request\", function () {",
+							"    const expectedPlaces = [",
+							"        { \"name\": \"Denver\", \"latitude\": \"39.856\", \"longitude\": \"-104.676\" },",
+							"        { \"name\": \"Tokyo\", \"latitude\": \"35.548\", \"longitude\": \"139.778\" },",
+							"        { \"name\": \"Sydney\", \"latitude\": \"-37.669\", \"longitude\": \"144.840\" },",
+							"        { \"name\": \"Lima\", \"latitude\": \"-11.826\", \"longitude\": \"-77.183\" }",
+							"    ];",
+							"",
+							"    pm.expect(response.places).to.eql(expectedPlaces);",
+							"});",
+							"",
+							"// Test if the formula used is correct",
+							"pm.test(\"Formula is Haversine\", function () {",
+							"    pm.expect(response.formula).to.eql(\"haversine\");",
+							"});",
+							"",
+							"// Test if distances are returned and match the expected values",
+							"pm.test(\"Distances are correct\", function () {",
+							"    const expectedDistances = [73369, 64025, 101895, 50304];",
+							"    pm.expect(response.distances).to.eql(expectedDistances);",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"id": "3d8d3a82-1c3a-4152-a939-e37d859d9204",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"requestType\"   :   \"distances\",\n  \"places\"        :   [{\"name\":\"Denver\", \"latitude\":  \"39.856\",  \"longitude\": \"-104.676\"},\n                      {\"name\": \"Tokyo\", \"latitude\":  \"35.548\", \"longitude\": \"139.778\"},\n                      {\"name\": \"Sydney\", \"latitude\":  \"-37.669\", \"longitude\": \"144.840\"},\n                      {\"name\": \"Lima\", \"latitude\":  \"-11.826\", \"longitude\": \"-77.183\"}],\n  \"earthRadius\"   :   50000,\n  \"formula\"       :   \"haversine\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BASE_URL}}/api/distances",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"api",
+						"distances"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "mboin: TestHaversineCalc_DuplicateLocations",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "202ea63f-31a9-424a-92ac-ef7a10f01c96",
+						"exec": [
+							"// Parse the response JSON\r",
+							"let response = pm.response.json();\r",
+							"\r",
+							"// Test if response status is 200\r",
+							"pm.test(\"Response status is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"// Test if response has the correct requestType\r",
+							"pm.test(\"Request type is distances\", function () {\r",
+							"    pm.expect(response.requestType).to.eql(\"distances\");\r",
+							"});\r",
+							"\r",
+							"// Test if the correct places are returned\r",
+							"pm.test(\"Places match the request\", function () {\r",
+							"    const expectedPlaces = [\r",
+							"        { \"name\": \"San Jose\", \"latitude\": \"37.34117209016717\", \"longitude\": \"-121.88271164900588\" },\r",
+							"        { \"name\": \"San Jose\", \"latitude\": \"37.34117209016717\", \"longitude\": \"-121.88271164900588\" },\r",
+							"        { \"name\": \"Puerto Williams\", \"latitude\": \"-54.9352191739683\", \"longitude\": \"-67.6057557056985\" },\r",
+							"        { \"name\": \"Queenstown\", \"latitude\": \"-45.029604366812634\", \"longitude\": \"168.6610028543199\" },\r",
+							"        { \"name\": \"Queenstown\", \"latitude\": \"-45.029604366812634\", \"longitude\": \"168.6610028543199\" },\r",
+							"        { \"name\": \"Krestovaya\", \"latitude\": \"70.91395803088582\", \"longitude\": \"158.5477393192286\" }\r",
+							"    ];\r",
+							"\r",
+							"    pm.expect(response.places).to.eql(expectedPlaces);\r",
+							"});\r",
+							"\r",
+							"// Test if the formula used is correct\r",
+							"pm.test(\"Formula is Haversine\", function () {\r",
+							"    pm.expect(response.formula).to.eql(\"haversine\");\r",
+							"});\r",
+							"\r",
+							"// Test if distances are returned and match the expected values\r",
+							"pm.test(\"Distances are correct\", function () {\r",
+							"    const expectedDistances = [0, 1801, 1208, 0, 2026, 901];\r",
+							"    pm.expect(response.distances).to.eql(expectedDistances);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"id": "5a26eb06-8159-4e2d-ab57-6eabcb884e64",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"requestType\"   :   \"distances\",\n    \"places\"        :   [{\"name\":\"San Jose\", \"latitude\":  \"37.34117209016717\",  \"longitude\": \"-121.88271164900588\"},\n                        {\"name\":\"San Jose\", \"latitude\":  \"37.34117209016717\",  \"longitude\": \"-121.88271164900588\"},\n                        {\"name\": \"Puerto Williams\", \"latitude\":  \"-54.9352191739683\", \"longitude\": \"-67.6057557056985\"},\n                        {\"name\": \"Queenstown\", \"latitude\":  \"-45.029604366812634\", \"longitude\": \"168.6610028543199\"},\n                        {\"name\": \"Queenstown\", \"latitude\":  \"-45.029604366812634\", \"longitude\": \"168.6610028543199\"},\n                        {\"name\": \"Krestovaya\", \"latitude\":  \"70.91395803088582\", \"longitude\": \"158.5477393192286\"}],\n    \"earthRadius\"   :   999,\n    \"formula\"       :   \"haversine\"\n  }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BASE_URL}}/api/distances",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"api",
+						"distances"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "mboin: TestHaversineCalc",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "202ea63f-31a9-424a-92ac-ef7a10f01c96",
+						"exec": [
+							"// Parse the response JSON",
+							"let response = pm.response.json();",
+							"",
+							"// Test if response status is 200",
+							"pm.test(\"Response status is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"// Test if response has the correct requestType",
+							"pm.test(\"Request type is distances\", function () {",
+							"    pm.expect(response.requestType).to.eql(\"distances\");",
+							"});",
+							"",
+							"// Test if the correct places are returned",
+							"pm.test(\"Places match the request\", function () {",
+							"    const expectedPlaces = [",
+							"        { \"name\": \"San Jose\", \"latitude\": \"37.34117209016717\", \"longitude\": \"-121.88271164900588\" },",
+							"        { \"name\": \"Puerto Williams\", \"latitude\": \"-54.9352191739683\", \"longitude\": \"-67.6057557056985\" },",
+							"        { \"name\": \"Queenstown\", \"latitude\": \"-45.029604366812634\", \"longitude\": \"168.6610028543199\" },",
+							"        { \"name\": \"Krestovaya\", \"latitude\": \"70.91395803088582\", \"longitude\": \"158.5477393192286\" }",
+							"    ];",
+							"",
+							"    pm.expect(response.places).to.eql(expectedPlaces);",
+							"});",
+							"",
+							"// Test if the formula used is correct",
+							"pm.test(\"Formula is Haversine\", function () {",
+							"    pm.expect(response.formula).to.eql(\"haversine\");",
+							"});",
+							"",
+							"// Test if distances are returned and match the expected values",
+							"pm.test(\"Distances are correct\", function () {",
+							"    const expectedDistances = [1801, 1208, 2026, 901];",
+							"    pm.expect(response.distances).to.eql(expectedDistances);",
+							"});",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"id": "c41bf506-d3f7-45b5-a344-25655ccd1b8d",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"requestType\"   :   \"distances\",\n    \"places\"        :   [{\"name\":\"San Jose\", \"latitude\":  \"37.34117209016717\",  \"longitude\": \"-121.88271164900588\"},\n                        {\"name\": \"Puerto Williams\", \"latitude\":  \"-54.9352191739683\", \"longitude\": \"-67.6057557056985\"},\n                        {\"name\": \"Queenstown\", \"latitude\":  \"-45.029604366812634\", \"longitude\": \"168.6610028543199\"},\n                        {\"name\": \"Krestovaya\", \"latitude\":  \"70.91395803088582\", \"longitude\": \"158.5477393192286\"}],\n    \"earthRadius\"   :   999,\n    \"formula\"       :   \"haversine\"\n  }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BASE_URL}}/api/distances",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"api",
+						"distances"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "testBadCalc_ethanarroyo68",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "202ea63f-31a9-424a-92ac-ef7a10f01c96",
+						"exec": [
+							"// Parse the response JSON",
+							"let response = pm.response.text();",
+							"",
+							"// Test if response status is 400",
+							"pm.test(\"Response status is 400\", function () {",
+							"    pm.response.to.have.status(400);",
+							"});",
+							"",
+							"// Test if response has the correct requestType",
+							"pm.test(\"Request type is distances\", function () {",
+							"    pm.expect(response).to.include(\"distances\");",
+							"});",
+							"",
+							"// Test if the correct places are returned",
+							"pm.test(\"Places match the request\", function () {",
+							"    // No changes needed for this test",
+							"});",
+							"",
+							"// Test if the formula used is correct",
+							"// pm.test(\"Formula is Haversine\", function () {",
+							"//     // No changes needed for this test",
+							"// });",
+							"",
+							"// Test if distances are returned and match the expected values",
+							"pm.test(\"Distances are correct\", function () {",
+							"    // No changes needed for this test",
+							"});",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"id": "8e17679c-3ae2-46f5-91d9-9c64cbea81fe",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"requestType\"   :   \"distances\",\n    \"places\"        :   [{\"name\":\"San Jose\", \"latitude\":  \"37.34117209016717\",  \"longitude\": \"-121.88271164900588\"},\n                        {\"name\": \"Puerto Williams\", \"latitude\":  \"-54.9352191739683\", \"longitude\": \"-67.6057557056985\"},\n                        {\"name\": \"Queenstown\", \"latitude\":  \"-45.029604366812634\", \"longitude\": \"168.6610028543199\"},\n                        {\"name\": \"Krestovaya\", \"latitude\":  \"70.91395803088582\", \"longitude\": \"158.5477393192286\"}],\n    \"earthRadius\"   :   999,\n    \"formula\"       :   \"bad\"\n  }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BASE_URL}}/api/distances",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"api",
+						"distances"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "mboin: TestHaversineCalc_NoLocation",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "202ea63f-31a9-424a-92ac-ef7a10f01c96",
+						"exec": [
+							"// Parse the response JSON",
+							"let response = pm.response.json();",
+							"",
+							"// Test if response status is 200",
+							"pm.test(\"Response status is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"// Test if response has the correct requestType",
+							"pm.test(\"Request type is distances\", function () {",
+							"    pm.expect(response.requestType).to.eql(\"distances\");",
+							"});",
+							"",
+							"// Test if the places array is empty",
+							"pm.test(\"Places array is empty\", function () {",
+							"    pm.expect(response.places).to.eql([]);",
+							"});",
+							"",
+							"// Test if the formula used is correct",
+							"pm.test(\"Formula is Haversine\", function () {",
+							"    pm.expect(response.formula).to.eql(\"haversine\");",
+							"});",
+							"",
+							"// Test if distances array is empty",
+							"pm.test(\"Distances array is empty\", function () {",
+							"    pm.expect(response.distances).to.eql([]);",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"id": "a619f5b0-7317-4648-977e-22b62f31a6de",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"requestType\"   :   \"distances\",\n  \"places\"        :   [],\n  \"earthRadius\"   :   50000,\n  \"formula\"       :   \"haversine\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BASE_URL}}/api/distances",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"api",
+						"distances"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "mboin: TestHaversineCalc_OneLocation",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "202ea63f-31a9-424a-92ac-ef7a10f01c96",
+						"exec": [
+							"// Parse the response JSON",
+							"let response = pm.response.json();",
+							"",
+							"// Test if response status is 200",
+							"pm.test(\"Response status is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"// Test if response has the correct requestType",
+							"pm.test(\"Request type is distances\", function () {",
+							"    pm.expect(response.requestType).to.eql(\"distances\");",
+							"});",
+							"",
+							"// Test if the correct places are returned",
+							"pm.test(\"Places match the request\", function () {",
+							"    const expectedPlaces = [",
+							"        { \"name\": \"Denver\", \"latitude\": \"39.856\", \"longitude\": \"-104.676\" }",
+							"    ];",
+							"",
+							"    pm.expect(response.places).to.eql(expectedPlaces);",
+							"});",
+							"",
+							"// Test if the formula used is correct",
+							"pm.test(\"Formula is Haversine\", function () {",
+							"    pm.expect(response.formula).to.eql(\"haversine\");",
+							"});",
+							"",
+							"// Test if distances are returned and match the expected value",
+							"pm.test(\"Distances are correct\", function () {",
+							"    const expectedDistances = [0];",
+							"    pm.expect(response.distances).to.eql(expectedDistances);",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"id": "5fff7948-4fce-4931-a89d-46372c5162a5",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"requestType\"   :   \"distances\",\n  \"places\"        :   [{\"name\":\"Denver\", \"latitude\":  \"39.856\",  \"longitude\": \"-104.676\"}],\n  \"earthRadius\"   :   50000,\n  \"formula\"       :   \"haversine\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BASE_URL}}/api/distances",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"api",
+						"distances"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "mboin: TestVincentyCalc",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "202ea63f-31a9-424a-92ac-ef7a10f01c96",
+						"exec": [
+							"// Parse the response JSON",
+							"let response = pm.response.json();",
+							"",
+							"// Test if response status is 200",
+							"pm.test(\"Response status is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"// Test if response has the correct requestType",
+							"pm.test(\"Request type is distances\", function () {",
+							"    pm.expect(response.requestType).to.eql(\"distances\");",
+							"});",
+							"",
+							"// Test if the correct places are returned",
+							"pm.test(\"Places match the request\", function () {",
+							"    const expectedPlaces = [",
+							"        { \"name\": \"New York\", \"latitude\": \"40.7128\", \"longitude\": \"-74.0060\" },",
+							"        { \"name\": \"Sydney\", \"latitude\": \"-33.8688\", \"longitude\": \"151.2093\" },",
+							"        { \"name\": \"Paris\", \"latitude\": \"48.8566\", \"longitude\": \"2.3522\" },",
+							"        { \"name\": \"Mumbai\", \"latitude\": \"19.0760\", \"longitude\": \"72.8777\" },",
+							"        { \"name\": \"Cairo\", \"latitude\": \"30.0444\", \"longitude\": \"31.2357\" }",
+							"    ];",
+							"",
+							"    pm.expect(response.places).to.eql(expectedPlaces);",
+							"});",
+							"",
+							"// Test if the formula used is correct",
+							"pm.test(\"Formula is Vincenty\", function () {",
+							"    pm.expect(response.formula).to.eql(\"vincenty\");",
+							"});",
+							"",
+							"// Test if distances are returned and match the expected value",
+							"pm.test(\"Distances are correct\", function () {",
+							"    const expectedDistances = [15989,16960,7009,4358,9022];",
+							"    pm.expect(response.distances).to.eql(expectedDistances);",
+							"});",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"id": "b71cda0a-a972-47bc-96e1-46a0ecb822d2",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"requestType\": \"distances\",\n  \"places\": [\n    {\n      \"name\": \"New York\",\n      \"latitude\": \"40.7128\",\n      \"longitude\": \"-74.0060\"\n    },\n    {\n      \"name\": \"Sydney\",\n      \"latitude\": \"-33.8688\",\n      \"longitude\": \"151.2093\"\n    },\n    {\n      \"name\": \"Paris\",\n      \"latitude\": \"48.8566\",\n      \"longitude\": \"2.3522\"\n    },\n    {\n      \"name\": \"Mumbai\",\n      \"latitude\": \"19.0760\",\n      \"longitude\": \"72.8777\"\n    },\n    {\n      \"name\": \"Cairo\",\n      \"latitude\": \"30.0444\",\n      \"longitude\": \"31.2357\"\n    }\n  ],\n  \"formula\": \"vincenty\",\n  \"earthRadius\": 6371\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BASE_URL}}/api/distances",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"api",
+						"distances"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "mboin: TestVincentyCalc_NoFormula",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "202ea63f-31a9-424a-92ac-ef7a10f01c96",
+						"exec": [
+							"// Parse the response JSON",
+							"let response = pm.response.json();",
+							"",
+							"// Test if response status is 200",
+							"pm.test(\"Response status is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"// Test if response has the correct requestType",
+							"pm.test(\"Request type is distances\", function () {",
+							"    pm.expect(response.requestType).to.eql(\"distances\");",
+							"});",
+							"",
+							"// Test if the correct places are returned",
+							"pm.test(\"Places match the request\", function () {",
+							"    const expectedPlaces = [",
+							"        { \"name\": \"New York\", \"latitude\": \"40.7128\", \"longitude\": \"-74.0060\" },",
+							"        { \"name\": \"Sydney\", \"latitude\": \"-33.8688\", \"longitude\": \"151.2093\" },",
+							"        { \"name\": \"Paris\", \"latitude\": \"48.8566\", \"longitude\": \"2.3522\" },",
+							"        { \"name\": \"Mumbai\", \"latitude\": \"19.0760\", \"longitude\": \"72.8777\" },",
+							"        { \"name\": \"Cairo\", \"latitude\": \"30.0444\", \"longitude\": \"31.2357\" }",
+							"    ];",
+							"",
+							"    pm.expect(response.places).to.eql(expectedPlaces);",
+							"});",
+							"",
+							"// Test if distances are returned and match the expected value",
+							"pm.test(\"Distances are correct\", function () {",
+							"    const expectedDistances = [15989, 16960, 7009, 4358, 9022]; // Expected distances in km",
+							"    pm.expect(response.distances).to.eql(expectedDistances);",
+							"});",
+							"",
+							"// Ensure formula is not included in the response",
+							"pm.test(\"Formula is not included in the response\", function () {",
+							"    pm.expect(response).to.not.have.property(\"formula\");",
+							"});",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"id": "35eb0e2a-935e-4424-ad6d-01885e2ce0f7",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"requestType\": \"distances\",\n  \"places\": [\n    {\n      \"name\": \"New York\",\n      \"latitude\": \"40.7128\",\n      \"longitude\": \"-74.0060\"\n    },\n    {\n      \"name\": \"Sydney\",\n      \"latitude\": \"-33.8688\",\n      \"longitude\": \"151.2093\"\n    },\n    {\n      \"name\": \"Paris\",\n      \"latitude\": \"48.8566\",\n      \"longitude\": \"2.3522\"\n    },\n    {\n      \"name\": \"Mumbai\",\n      \"latitude\": \"19.0760\",\n      \"longitude\": \"72.8777\"\n    },\n    {\n      \"name\": \"Cairo\",\n      \"latitude\": \"30.0444\",\n      \"longitude\": \"31.2357\"\n    }\n  ],\n  \"earthRadius\": 6371\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BASE_URL}}/api/distances",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"api",
+						"distances"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "mboin: TestVincentyCalc_BadFormula",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "202ea63f-31a9-424a-92ac-ef7a10f01c96",
+						"exec": [
+							"// Parse the response JSON",
+							"let response = pm.response.json();",
+							"",
+							"// Test if response status is 200",
+							"pm.test(\"Response status is 400\", function () {",
+							"    pm.response.to.have.status(400);",
+							"});",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"id": "fc6f51e2-cbb1-41c9-9879-6bbe7bd824c0",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"requestType\": \"distances\",\n  \"places\": [\n    {\n      \"name\": \"New York\",\n      \"latitude\": \"40.7128\",\n      \"longitude\": \"-74.0060\"\n    },\n    {\n      \"name\": \"Sydney\",\n      \"latitude\": \"-33.8688\",\n      \"longitude\": \"151.2093\"\n    },\n    {\n      \"name\": \"Paris\",\n      \"latitude\": \"48.8566\",\n      \"longitude\": \"2.3522\"\n    },\n    {\n      \"name\": \"Mumbai\",\n      \"latitude\": \"19.0760\",\n      \"longitude\": \"72.8777\"\n    },\n    {\n      \"name\": \"Cairo\",\n      \"latitude\": \"30.0444\",\n      \"longitude\": \"31.2357\"\n    }\n  ],\n  \"formula\": \"vicenty\",\n  \"earthRadius\": 6371\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BASE_URL}}/api/distances",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"api",
+						"distances"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "TestVincentyCalc_c835266433",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "202ea63f-31a9-424a-92ac-ef7a10f01c96",
+						"exec": [
+							"// Removed response JSON parsing for non-JSON response",
+							"// Expected distances",
+							"const expectedDistances = [1150, 7955, 8513, 12548, 9262, 7557];",
+							"",
+							"// Check if response contains the correct request type",
+							"pm.test(\"Request type is distances\", function () {",
+							"    pm.expect(pm.response.text()).to.include(\"distances\");",
+							"});",
+							"",
+							"// Check if the correct formula was used",
+							"pm.test(\"Formula is vincenty\", function () {",
+							"    pm.expect(pm.response.text()).to.include(\"vincenty\");",
+							"});",
+							"",
+							"// Validate earth radius",
+							"pm.test(\"Earth radius is correct\", function () {",
+							"    pm.expect(pm.response.text()).to.include(\"5000\");",
+							"});",
+							"",
+							"// Validate the distances",
+							"pm.test(\"Distances match expected values\", function () {",
+							"    pm.expect(pm.response.text()).to.include(expectedDistances.join(','));",
+							"});",
+							"",
+							"// Check all places are present",
+							"pm.test(\"Places are correct\", function () {",
+							"    const expectedPlaces = [\"CSU Oval\", \"The Bean\", \"Tokyo\", \"New York\", \"Sydney\", \"Buenos Aires\"];",
+							"    const responseText = pm.response.text();",
+							"    expectedPlaces.forEach(place => {",
+							"        pm.expect(responseText).to.include(place);",
+							"    });",
+							"});",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"packages": {},
+						"type": "text/javascript"
+					}
+				}
+			],
+			"id": "ac47fb41-2be7-4302-b0eb-6c7831ba0ef9",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"requestType\": \"distances\",\n  \"places\": [\n    {\n      \"name\": \"CSU Oval\",\n      \"latitude\": \"40.58\",\n      \"longitude\": \"-105.08\"\n    },\n    {\n      \"name\": \"The Bean\",\n      \"latitude\": \"41.88\",\n      \"longitude\": \"-87.62\"\n    },\n    {\n      \"name\": \"Tokyo\",\n      \"latitude\": \"35.682839\",\n      \"longitude\": \"139.759455\"\n    },\n    {\n      \"name\": \"New York\",\n      \"latitude\": \"40.712776\",\n      \"longitude\": \"-74.005974\"\n    },\n    {\n      \"name\": \"Sydney\",\n      \"latitude\": \"-33.868820\",\n      \"longitude\": \"151.209290\"\n    },\n    {\n      \"name\": \"Buenos Aires\",\n      \"latitude\": \"-34.603722\",\n      \"longitude\": \"-58.381592\"\n    }\n  ],\n  \"formula\": \"vincenty\",\n  \"earthRadius\": 5000\n}\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BASE_URL}}/api/distances",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"api",
+						"distances"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "c835266433_haversineInteropTest",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "202ea63f-31a9-424a-92ac-ef7a10f01c96",
+						"exec": [
+							"// Removed response JSON parsing for non-JSON response",
+							"// Expected distances",
+							"const expectedDistances = [34906585039886588, 34906585039886588];",
+							"",
+							"// Check if response contains the correct request type",
+							"pm.test(\"Request type is distances\", function () {",
+							"    pm.expect(pm.response.text()).to.include(\"distances\");",
+							"});",
+							"",
+							"// Check if the correct formula was used",
+							"pm.test(\"Formula is cosines\", function () {",
+							"    pm.expect(pm.response.text()).to.include(\"haversine\");",
+							"});",
+							"",
+							"// Validate the distances",
+							"pm.test(\"Distances match expected values\", function () {",
+							"    pm.expect(pm.response.text()).to.include(expectedDistances.join(','));",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "c819f89b-1e5e-4f44-a4d9-81ce7a62e2f6",
+						"exec": [
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"id": "2411382d-e8bd-43f1-9558-e38e31841767",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"requestType\": \"distances\",\n    \"places\": [\n            {\n                \"name\": \"Place\",\n                \"latitude\": \"-10.0\",\n                \"longitude\": \"0.0\"\n            },\n            {\n                \"name\": \"Place\",\n                \"latitude\": \"10.0\",\n                \"longitude\": \"0.0\"\n            }\n        ],\n    \"earthRadius\": 1e+17,\n    \"formula\": \"haversine\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BASE_URL}}/api/distances",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"api",
+						"distances"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "c835266433_testCosinesCalc",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "202ea63f-31a9-424a-92ac-ef7a10f01c96",
+						"exec": [
+							"// Removed response JSON parsing for non-JSON response",
+							"// Expected distances",
+							"const expectedDistances = [13903, 18322, 17810, 13074];",
+							"",
+							"// Check if response contains the correct request type",
+							"pm.test(\"Request type is distances\", function () {",
+							"    pm.expect(pm.response.text()).to.include(\"distances\");",
+							"});",
+							"",
+							"// Check if the correct formula was used",
+							"pm.test(\"Formula is cosines\", function () {",
+							"    pm.expect(pm.response.text()).to.include(\"cosines\");",
+							"});",
+							"",
+							"// Validate earth radius",
+							"pm.test(\"Earth radius is correct\", function () {",
+							"    pm.expect(pm.response.text()).to.include(\"10000\");",
+							"});",
+							"",
+							"// Validate the distances",
+							"pm.test(\"Distances match expected values\", function () {",
+							"    pm.expect(pm.response.text()).to.include(expectedDistances.join(','));",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "c819f89b-1e5e-4f44-a4d9-81ce7a62e2f6",
+						"exec": [
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"id": "f88bbf45-f545-4947-87c7-01058b99f9d6",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"requestType\"    : \"distances\",\n  \"places\"         : [{\"name\":\"Seoul, South Korea\", \"latitude\":  \"37.5665\",  \"longitude\": \"126.9780\"},\n                      {\"name\": \"London, United Kingdom\", \"latitude\":  \"51.5074\", \"longitude\": \"-0.1278\"},\n                      {\"name\": \"Santiago, Chile\", \"latitude\":  \"-33.4489\", \"longitude\": \"-70.6693\"},\n                      {\"name\": \"Sydney, Australia\", \"latitude\":  \"-33.8688\", \"longitude\": \"151.2093\"}],\n  \"earthRadius\"    : 10000,\n   \"formula\"       : \"cosines\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BASE_URL}}/api/distances",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"api",
+						"distances"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "quintenr: largeDistanceTest",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "254c9afa-1c8e-4cb4-b809-c354559e9523",
+						"exec": [
+							"const loot = pm.response.json();\r",
+							"\r",
+							"pm.test(\"Response is HTTP200 status\", () => {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response is an array of distances\", () => {\r",
+							"    pm.expect(loot.distances).to.be.an(\"array\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Distances equals 50\", () => {\r",
+							"    pm.expect(loot.distances.length).to.equal(50);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"id": "2f4a4dc8-db94-499d-b800-1ac9ffb189e7",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"requestType\": \"distances\",\r\n  \"places\": [\r\n    {\"name\": \"New York\", \"latitude\": \"40.7128\", \"longitude\": \"-74.0060\"},\r\n    {\"name\": \"Paris\", \"latitude\": \"48.8566\", \"longitude\": \"2.3522\"},\r\n    {\"name\": \"Berlin\", \"latitude\": \"52.5200\", \"longitude\": \"13.4050\"},\r\n    {\"name\": \"Moscow\", \"latitude\": \"55.7558\", \"longitude\": \"37.6173\"},\r\n    {\"name\": \"Dubai\", \"latitude\": \"25.276987\", \"longitude\": \"55.296249\"},\r\n    {\"name\": \"Cape Town\", \"latitude\": \"-33.9249\", \"longitude\": \"18.4241\"},\r\n    {\"name\": \"Beijing\", \"latitude\": \"39.9042\", \"longitude\": \"116.4074\"},\r\n    {\"name\": \"Los Angeles\", \"latitude\": \"34.0522\", \"longitude\": \"-118.2437\"},\r\n    {\"name\": \"London\", \"latitude\": \"51.5074\", \"longitude\": \"-0.1278\"},\r\n    {\"name\": \"Toronto\", \"latitude\": \"43.65107\", \"longitude\": \"-79.347015\"},\r\n    {\"name\": \"Singapore\", \"latitude\": \"1.3521\", \"longitude\": \"103.8198\"},\r\n    {\"name\": \"Mexico City\", \"latitude\": \"19.4326\", \"longitude\": \"-99.1332\"},\r\n    {\"name\": \"Rome\", \"latitude\": \"41.9028\", \"longitude\": \"12.4964\"},\r\n    {\"name\": \"Istanbul\", \"latitude\": \"41.0082\", \"longitude\": \"28.9784\"},\r\n    {\"name\": \"Seoul\", \"latitude\": \"37.5665\", \"longitude\": \"126.9780\"},\r\n    {\"name\": \"Rio de Janeiro\", \"latitude\": \"-22.9068\", \"longitude\": \"-43.1729\"},\r\n    {\"name\": \"Mumbai\", \"latitude\": \"19.0760\", \"longitude\": \"72.8777\"},\r\n    {\"name\": \"Bangkok\", \"latitude\": \"13.7563\", \"longitude\": \"100.5018\"},\r\n    {\"name\": \"Madrid\", \"latitude\": \"40.4168\", \"longitude\": \"-3.7038\"},\r\n    {\"name\": \"Buenos Aires\", \"latitude\": \"-34.6037\", \"longitude\": \"-58.3816\"},\r\n    {\"name\": \"Johannesburg\", \"latitude\": \"-26.2041\", \"longitude\": \"28.0473\"},\r\n    {\"name\": \"Hong Kong\", \"latitude\": \"22.3193\", \"longitude\": \"114.1694\"},\r\n    {\"name\": \"Dublin\", \"latitude\": \"53.3498\", \"longitude\": \"-6.2603\"},\r\n    {\"name\": \"San Francisco\", \"latitude\": \"37.7749\", \"longitude\": \"-122.4194\"},\r\n    {\"name\": \"Shanghai\", \"latitude\": \"31.2304\", \"longitude\": \"121.4737\"},\r\n    {\"name\": \"Athens\", \"latitude\": \"37.9838\", \"longitude\": \"23.7275\"},\r\n    {\"name\": \"Kuala Lumpur\", \"latitude\": \"3.1390\", \"longitude\": \"101.6869\"},\r\n    {\"name\": \"Oslo\", \"latitude\": \"59.9139\", \"longitude\": \"10.7522\"},\r\n    {\"name\": \"Warsaw\", \"latitude\": \"52.2297\", \"longitude\": \"21.0122\"},\r\n    {\"name\": \"Lisbon\", \"latitude\": \"38.7169\", \"longitude\": \"-9.1390\"},\r\n    {\"name\": \"Jakarta\", \"latitude\": \"-6.2088\", \"longitude\": \"106.8456\"},\r\n    {\"name\": \"Hanoi\", \"latitude\": \"21.0285\", \"longitude\": \"105.8542\"},\r\n    {\"name\": \"Bogotá\", \"latitude\": \"4.7110\", \"longitude\": \"-74.0721\"},\r\n    {\"name\": \"Caracas\", \"latitude\": \"10.4806\", \"longitude\": \"-66.9036\"},\r\n    {\"name\": \"Abu Dhabi\", \"latitude\": \"24.4539\", \"longitude\": \"54.3773\"},\r\n    {\"name\": \"Vienna\", \"latitude\": \"48.2082\", \"longitude\": \"16.3738\"},\r\n    {\"name\": \"Zurich\", \"latitude\": \"47.3769\", \"longitude\": \"8.5417\"},\r\n    {\"name\": \"Stockholm\", \"latitude\": \"59.3293\", \"longitude\": \"18.0686\"},\r\n    {\"name\": \"Santiago\", \"latitude\": \"-33.4489\", \"longitude\": \"-70.6693\"},\r\n    {\"name\": \"Prague\", \"latitude\": \"50.0755\", \"longitude\": \"14.4378\"},\r\n    {\"name\": \"Helsinki\", \"latitude\": \"60.1699\", \"longitude\": \"24.9384\"},\r\n    {\"name\": \"Manila\", \"latitude\": \"14.5995\", \"longitude\": \"120.9842\"},\r\n    {\"name\": \"Cairo\", \"latitude\": \"30.0444\", \"longitude\": \"31.2357\"},\r\n    {\"name\": \"Nairobi\", \"latitude\": \"-1.2921\", \"longitude\": \"36.8219\"},\r\n    {\"name\": \"Edinburgh\", \"latitude\": \"55.9533\", \"longitude\": \"-3.1883\"},\r\n    {\"name\": \"Reykjavik\", \"latitude\": \"64.1355\", \"longitude\": \"-21.8954\"},\r\n    {\"name\": \"Anchorage\", \"latitude\": \"61.2181\", \"longitude\": \"-149.9003\"},\r\n    {\"name\": \"Kathmandu\", \"latitude\": \"27.7172\", \"longitude\": \"85.3240\"},\r\n    {\"name\": \"Honolulu\", \"latitude\": \"21.3069\", \"longitude\": \"-157.8583\"},\r\n    {\"name\": \"Panama City\", \"latitude\": \"8.9833\", \"longitude\": \"-79.5167\"}\r\n  ],\r\n  \"earthRadius\": 6371,\r\n  \"formula\": \"vincenty\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BASE_URL}}/api/distances",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"api",
+						"distances"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

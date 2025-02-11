@@ -1,0 +1,1422 @@
+{
+	"info": {
+		"_postman_id": "a69fac46-d554-4d46-ae07-8f8f02d127f3",
+		"name": "find",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_uid": "38157129-a69fac46-d554-4d46-ae07-8f8f02d127f3"
+	},
+	"item": [
+		{
+			"name": "base",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Response is HTTP200 status\", () => {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"id": "b2ae6359-13de-4857-98b1-94c6f7af9150",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"requestType\"    : \"find\",\n  \"match\"          : \"dave\",\n  \"type\"           : [\"airport\"], \n  \"where\"          : [\"United States\"],\n  \"limit\"          : 10\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BASE_URL}}/api/find",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"api",
+						"find"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "dampierj: find_test",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Response is HTTP200 status\", () => {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"pm.test(\"Places has less than or equal to limit items\", function () {",
+							"    pm.expect(pm.response.json().places.length).to.be.below(pm.response.json().limit + 1);",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"id": "0bf7c60a-a90f-43f3-bdf1-c65dcd47816f",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"requestType\"    : \"find\",\n  \"match\"          : \"justin\",\n  \"limit\"          : 5\n}\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BASE_URL}}/api/find",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"api",
+						"find"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "mboin: find_by_id",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "fa64a446-1753-4ddd-9018-e0f47b0fd100",
+						"exec": [
+							"pm.test(\"Response is HTTP200 status\", () => {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Places has less than or equal to limit items\", function () {",
+							"    pm.expect(pm.response.json().places.length).to.be.below(pm.response.json().limit + 1);",
+							"});",
+							"",
+							"pm.test(\"Found exactly one match for ID 0TS1\", function () {",
+							"    const response = pm.response.json();",
+							"    pm.expect(response.found).to.equal(1);",
+							"    pm.expect(response.places[0].id).to.equal(\"0TS1\");",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"id": "b3117d21-16d7-4285-b600-ad47a613b23a",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"requestType\"    : \"find\",\n  \"match\"          : \"0TS1\",\n  \"limit\"          : 5\n}\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BASE_URL}}/api/find",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"api",
+						"find"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "dampierj: near_same_places_test",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Response is HTTP200 status\", () => {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Places has less than or equal to limit items\", function () {",
+							"    pm.expect(pm.response.json().places.length).to.be.below(pm.response.json().limit + 1);",
+							"});",
+							"",
+							"pm.test(\"Distances has same amount of items as places\", function () {",
+							"    pm.expect(pm.response.json().places.length).to.eql(pm.response.json().distances.length);",
+							"});",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"id": "c1e34ec9-99b4-4487-9a16-ed228d0e8694",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"requestType\": \"near\",\n    \"place\": {\"latitude\": \"39.7294\", \"longitude\": \"-104.8319\"},\n    \"distance\": 10,\n    \"earthRadius\": 6371,\n    \"limit\": 3\n}\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BASE_URL}}/api/near",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"api",
+						"near"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "quintenr: highlimittest_find",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Response is HTTP200 status\", () => {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Places doesn't exceed limit\", function () {\r",
+							"    pm.expect(pm.response.json().places.length).to.be.below(pm.response.json().limit + 1);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response is not null\", () => {\r",
+							"    pm.expect(pm.response).to.not.be.null;\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"id": "f34fdf28-11d1-4a33-8d42-66b1eaa8272e",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\t\"requestType\": \"find\",\r\n\t\"match\": \"Air\",\r\n\t\"limit\": 50\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BASE_URL}}/api/find",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"api",
+						"find"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "mboin: find_test",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "39227a05-13a8-4142-956b-24033c6fafae",
+						"exec": [
+							"pm.test(\"Response is HTTP200 status\", () => {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"pm.test(\"Places has less than or equal to limit items\", function () {",
+							"    pm.expect(pm.response.json().places.length).to.be.below(pm.response.json().limit + 1);",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"id": "17b4a169-5d2d-4181-879a-93d03ef64364",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"requestType\"    : \"find\",\n  \"match\"          : \"matt\",\n  \"limit\"          : 23\n}\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BASE_URL}}/api/find",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"api",
+						"find"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "c835266433_correct_places1",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "5f813c6e-8630-4c5b-b38b-73e461e6b61a",
+						"exec": [
+							"pm.test(\"Response is HTTP200 status\", () => {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"pm.test(\"Places has less than or equal to limit items\", function () {",
+							"    pm.expect(pm.response.json().places.length).to.be.below(pm.response.json().limit + 1);",
+							"});",
+							"",
+							"// Define the expected order of IDs for the \"ethan\" search response",
+							"const expectedIds = [\"72NC\", \"75K\", \"86IL\", \"8NK4\", \"CA-0048\", \"FYBC\", \"MO53\", \"SK-147\", \"YARL\"]",
+							"",
+							"// Parse the response body",
+							"const responseData = pm.response.json();",
+							"",
+							"// Extract the `id` values from the `places` array",
+							"const actualIds = responseData.places.map(place => place.id);",
+							"",
+							"// Test that both sets of IDs are identical, regardless of order",
+							"pm.test(\"Response contains the exact IDs, order ignored\", function () {",
+							"    pm.expect(actualIds.sort()).to.eql(expectedIds.sort());",
+							"});",
+							"",
+							"// Check that the ORDER of both arrays is the same",
+							"pm.test(\"Response contains the exact IDs in the correct order\", function () {",
+							"    pm.expect(actualIds).to.eql(expectedIds);",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"id": "eea03b5d-c44f-4cee-abe3-00b723c0acf1",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"requestType\"    : \"find\",\n  \"match\"          : \"ethan\",\n  \"limit\"          : 10\n}\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BASE_URL}}/api/find",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"api",
+						"find"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "c835266433_correct_places2",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "5f813c6e-8630-4c5b-b38b-73e461e6b61a",
+						"exec": [
+							"pm.test(\"Response is HTTP200 status\", () => {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"pm.test(\"Places has less than or equal to limit items\", function () {",
+							"    pm.expect(pm.response.json().places.length).to.be.below(pm.response.json().limit + 1);",
+							"});",
+							"",
+							"// Define the expected order of IDs for the \"jefferson\" search response",
+							"const expectedIds = [",
+							"    \"17NE\", \"21OG\", \"2OR3\", \"3IA2\", \"4LA7\", \"58MO\", \"60PN\", \"6F7\", \"74FL\",",
+							"    \"7IA6\", \"7WA2\", \"9PA8\", \"K0S9\", \"K19A\", \"K1U2\", \"K24F\", \"K2G2\", \"KEFW\",",
+							"    \"KGEV\", \"KJEF\"",
+							"]",
+							"",
+							"// Parse the response body",
+							"const responseData = pm.response.json();",
+							"",
+							"// Extract the `id` values from the `places` array",
+							"const actualIds = responseData.places.map(place => place.id);",
+							"",
+							"// Test that both sets of IDs are identical, regardless of order",
+							"pm.test(\"Response contains the exact IDs, order ignored\", function () {",
+							"    pm.expect(actualIds.sort()).to.eql(expectedIds.sort());",
+							"});",
+							"",
+							"// Check that the ORDER of both arrays is the same",
+							"pm.test(\"Response contains the exact IDs in the correct order\", function () {",
+							"    pm.expect(actualIds).to.eql(expectedIds);",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"id": "2fbfe92a-673a-4a5c-a59e-835bc4ce1a12",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"requestType\"    : \"find\",\n  \"match\"          : \"jefferson\",\n  \"limit\"          : 20\n}\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BASE_URL}}/api/find",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"api",
+						"find"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "c835266433_correct_places3",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "5f813c6e-8630-4c5b-b38b-73e461e6b61a",
+						"exec": [
+							"pm.test(\"Response is HTTP200 status\", () => {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"pm.test(\"Places has less than or equal to limit items\", function () {",
+							"    pm.expect(pm.response.json().places.length).to.be.below(pm.response.json().limit + 1);",
+							"});",
+							"",
+							"// Define the expected order of IDs for the \"washington\" search response",
+							"const expectedIds = [",
+							"    \"00W\", \"00WA\", \"00WN\", \"01WA\", \"01WN\", \"01WT\", \"02WA\", \"02WN\", \"03WA\",",
+							"    \"03WN\", \"04WA\", \"04WN\", \"05WA\", \"05WN\", \"06WA\", \"06WN\", \"07NH\", \"07WA\",",
+							"    \"08WA\", \"09S\"",
+							"]",
+							"",
+							"",
+							"// Parse the response body",
+							"const responseData = pm.response.json();",
+							"",
+							"// Extract the `id` values from the `places` array",
+							"const actualIds = responseData.places.map(place => place.id);",
+							"",
+							"// Test that both sets of IDs are identical, regardless of order",
+							"pm.test(\"Response contains the exact IDs, order ignored\", function () {",
+							"    pm.expect(actualIds.sort()).to.eql(expectedIds.sort());",
+							"});",
+							"",
+							"// Check that the ORDER of both arrays is the same",
+							"pm.test(\"Response contains the exact IDs in the correct order\", function () {",
+							"    pm.expect(actualIds).to.eql(expectedIds);",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"id": "a372d072-87ed-464f-a374-93c234686c10",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"requestType\"    : \"find\",\n  \"match\"          : \"washington\",\n  \"limit\"          : 20\n}\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BASE_URL}}/api/find",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"api",
+						"find"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "mboin: near_limit2",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Response is HTTP200 status\", () => {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"id": "685c12ae-a4a3-405c-a3c4-fe876611c3eb",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"requestType\"    : \"near\",\n  \"place\"          : {\"latitude\":\"38.532798767089844\", \"longitude\":\"-105.98999786376953\"},\n  \"distance\"       : 15,\n  \"earthRadius\"    : 6371,\n  \"formula\"        : \"vincenty\",\n  \"limit\"          : 5\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BASE_URL}}/api/near",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"api",
+						"near"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "mboin: near_pole",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "e0967e41-6a59-4407-80bf-7e159dd5350b",
+						"exec": [
+							"// Validate HTTP Status",
+							"pm.test(\"Response is HTTP 200 status\", () => {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"// Parse the response JSON",
+							"const jsonData = pm.response.json();",
+							"",
+							"// Validate the number of places",
+							"pm.test(\"Number of places is 1\", () => {",
+							"    pm.expect(jsonData.places.length).to.eql(1);",
+							"});",
+							"",
+							"// Validate the sum of distances",
+							"const totalDistance = jsonData.distances.reduce((sum, distance) => sum + distance, 0);",
+							"pm.test(\"Sum of distances is 35\", () => {",
+							"    pm.expect(totalDistance).to.eql(35);",
+							"});",
+							"",
+							"// Log results",
+							"console.log(\"Number of places:\", jsonData.places.length);",
+							"console.log(\"Sum of distances:\", totalDistance);",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "3348a3d5-ef35-4e5f-879f-144979581fd4",
+						"exec": [
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"id": "e1a8d37f-a882-4e8a-b853-f3c87311e814",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"requestType\"    : \"near\",\n  \"place\"          : {\"latitude\":\"-89.5\", \"longitude\":\"0\"},\n  \"distance\"       : 50,\n  \"earthRadius\"    : 3959,\n  \"formula\"        : \"vincenty\",\n  \"limit\"          : 100\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BASE_URL}}/api/near",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"api",
+						"near"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "mboin: near_oslo_lim10",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "e0967e41-6a59-4407-80bf-7e159dd5350b",
+						"exec": [
+							"// Validate HTTP Status",
+							"pm.test(\"Response is HTTP 200 status\", () => {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"// Parse the response JSON",
+							"const jsonData = pm.response.json();",
+							"",
+							"// Validate the number of places",
+							"pm.test(\"Number of places is 10\", () => {",
+							"    pm.expect(jsonData.places.length).to.eql(10);",
+							"});",
+							"",
+							"// Validate the sum of distances",
+							"const totalDistance = jsonData.distances.reduce((sum, distance) => sum + distance, 0);",
+							"pm.test(\"Sum of distances is 177\", () => {",
+							"    pm.expect(totalDistance).to.eql(177);",
+							"});",
+							"",
+							"// Log results",
+							"console.log(\"Number of places:\", jsonData.places.length);",
+							"console.log(\"Sum of distances:\", totalDistance);",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "3348a3d5-ef35-4e5f-879f-144979581fd4",
+						"exec": [
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"id": "9139cbfa-8e85-4407-94ac-d5f6cba7f47e",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"requestType\"    : \"near\",\n  \"place\"          : {\"latitude\":\"60\", \"longitude\":\"11\"},\n  \"distance\"       : 50,\n  \"earthRadius\"    : 6371,\n  \"formula\"        : \"vincenty\",\n  \"limit\"          : 10\n}\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BASE_URL}}/api/near",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"api",
+						"near"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "mboin: near_oslo_lim1",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "e0967e41-6a59-4407-80bf-7e159dd5350b",
+						"exec": [
+							"// Validate HTTP Status",
+							"pm.test(\"Response is HTTP 200 status\", () => {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"// Parse the response JSON",
+							"const jsonData = pm.response.json();",
+							"",
+							"// Validate the number of places",
+							"pm.test(\"Number of places is 1\", () => {",
+							"    pm.expect(jsonData.places.length).to.eql(1);",
+							"});",
+							"",
+							"// Validate the sum of distances",
+							"const totalDistance = jsonData.distances.reduce((sum, distance) => sum + distance, 0);",
+							"pm.test(\"Sum of distances is 4\", () => {",
+							"    pm.expect(totalDistance).to.eql(4);",
+							"});",
+							"",
+							"// Log results",
+							"console.log(\"Number of places:\", jsonData.places.length);",
+							"console.log(\"Sum of distances:\", totalDistance);",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "3348a3d5-ef35-4e5f-879f-144979581fd4",
+						"exec": [
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"id": "66e63ef4-7e8a-453d-81df-73fad056cffe",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"requestType\"    : \"near\",\n  \"place\"          : {\"latitude\":\"60\", \"longitude\":\"11\"},\n  \"distance\"       : 50,\n  \"earthRadius\"    : 6371,\n  \"formula\"        : \"vincenty\",\n  \"limit\"          : 1\n}\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BASE_URL}}/api/near",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"api",
+						"near"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "mboin: near_nyc_lim100",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "e0967e41-6a59-4407-80bf-7e159dd5350b",
+						"exec": [
+							"// Validate HTTP Status",
+							"pm.test(\"Response is HTTP 200 status\", () => {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"// Parse the response JSON",
+							"const jsonData = pm.response.json();",
+							"",
+							"// Validate the number of places",
+							"pm.test(\"Number of places is 100\", () => {",
+							"    pm.expect(jsonData.places.length).to.eql(100);",
+							"});",
+							"",
+							"// Validate the sum of distances",
+							"const totalDistance = jsonData.distances.reduce((sum, distance) => sum + distance, 0);",
+							"pm.test(\"Sum of distances is 1184\", () => {",
+							"    pm.expect(totalDistance).to.eql(1184);",
+							"});",
+							"",
+							"// Log results",
+							"console.log(\"Number of places:\", jsonData.places.length);",
+							"console.log(\"Sum of distances:\", totalDistance);"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "3348a3d5-ef35-4e5f-879f-144979581fd4",
+						"exec": [
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"id": "a8231f5a-f58d-4a8c-bcdc-debaa2aecf6c",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"requestType\"    : \"near\",\n  \"place\"          : {\"latitude\":\"40.70075\", \"longitude\":\"-74.0086\"},\n  \"distance\"       : 50,\n  \"earthRadius\"    : 3959,\n  \"formula\"        : \"vincenty\",\n  \"limit\"          : 100\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BASE_URL}}/api/near",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"api",
+						"near"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "mboin: near_fiji_edge1",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "34406f3c-33d3-462f-a63c-c4a0ba35fe4c",
+						"exec": [
+							"// Validate HTTP Status",
+							"pm.test(\"Response is HTTP200 status\", () => {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"// Parse the response JSON",
+							"const jsonData = pm.response.json();",
+							"",
+							"// Validate the number of places",
+							"pm.test(\"Number of places is 7\", () => {",
+							"    pm.expect(jsonData.places.length).to.eql(7);",
+							"});",
+							"",
+							"// Validate the sum of distances",
+							"const totalDistance = jsonData.distances.reduce((sum, distance) => sum + distance, 0);",
+							"pm.test(\"Sum of distances is 254\", () => {",
+							"    pm.expect(totalDistance).to.eql(254);",
+							"});",
+							"",
+							"// Log results",
+							"console.log(\"Number of places:\", jsonData.places.length);",
+							"console.log(\"Sum of distances:\", totalDistance);"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "cfecb036-20f8-4e6c-96e6-0ed66ebf60dd",
+						"exec": [
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"id": "849d92f8-f0b3-473a-b1b1-5ea3a0c58ecd",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"requestType\"    : \"near\",\n  \"place\"          : {\"latitude\":\"-17\", \"longitude\":\"180\"},\n  \"distance\"       : 50,\n  \"earthRadius\"    : 3959,\n  \"formula\"        : \"vincenty\",\n  \"limit\"          : 100\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BASE_URL}}/api/near",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"api",
+						"near"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "mboin: near_fiji_edge2",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "34406f3c-33d3-462f-a63c-c4a0ba35fe4c",
+						"exec": [
+							"// Validate HTTP Status",
+							"pm.test(\"Response is HTTP200 status\", () => {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"// Parse the response JSON",
+							"const jsonData = pm.response.json();",
+							"",
+							"// Validate the number of places",
+							"pm.test(\"Number of places is 7\", () => {",
+							"    pm.expect(jsonData.places.length).to.eql(7);",
+							"});",
+							"",
+							"// Validate the sum of distances",
+							"const totalDistance = jsonData.distances.reduce((sum, distance) => sum + distance, 0);",
+							"pm.test(\"Sum of distances is 254\", () => {",
+							"    pm.expect(totalDistance).to.eql(254);",
+							"});",
+							"",
+							"// Log results",
+							"console.log(\"Number of places:\", jsonData.places.length);",
+							"console.log(\"Sum of distances:\", totalDistance);"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "cfecb036-20f8-4e6c-96e6-0ed66ebf60dd",
+						"exec": [
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"id": "16438f39-b088-4b92-aeda-d8b07e11cf95",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"requestType\"    : \"near\",\n  \"place\"          : {\"latitude\":\"-17\", \"longitude\":\"-180\"},\n  \"distance\"       : 50,\n  \"earthRadius\"    : 3959,\n  \"formula\"        : \"vincenty\",\n  \"limit\"          : 100\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BASE_URL}}/api/near",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"api",
+						"near"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "mboin: near_alaska_edge",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "34406f3c-33d3-462f-a63c-c4a0ba35fe4c",
+						"exec": [
+							"// Validate HTTP Status",
+							"pm.test(\"Response is HTTP200 status\", () => {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"// Parse the response JSON",
+							"const jsonData = pm.response.json();",
+							"",
+							"// Validate the number of places",
+							"pm.test(\"Number of places is 2\", () => {",
+							"    pm.expect(jsonData.places.length).to.eql(2);",
+							"});",
+							"",
+							"// Validate the sum of distances",
+							"const totalDistance = jsonData.distances.reduce((sum, distance) => sum + distance, 0);",
+							"pm.test(\"Sum of distances is 82\", () => {",
+							"    pm.expect(totalDistance).to.eql(82);",
+							"});",
+							"",
+							"// Log results",
+							"console.log(\"Number of places:\", jsonData.places.length);",
+							"console.log(\"Sum of distances:\", totalDistance);"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "cfecb036-20f8-4e6c-96e6-0ed66ebf60dd",
+						"exec": [
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"id": "5c3247fd-bc2d-4e86-a858-480b4aded0a0",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"requestType\"    : \"near\",\n  \"place\"          : {\"latitude\":\"51\", \"longitude\":\"-180\"},\n  \"distance\"       : 50,\n  \"earthRadius\"    : 3959,\n  \"formula\"        : \"vincenty\",\n  \"limit\"          : 100\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BASE_URL}}/api/near",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"api",
+						"near"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "mboin: near_antartica_edge",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "34406f3c-33d3-462f-a63c-c4a0ba35fe4c",
+						"exec": [
+							"// Validate HTTP Status",
+							"pm.test(\"Response is HTTP200 status\", () => {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"// Parse the response JSON",
+							"const jsonData = pm.response.json();",
+							"",
+							"// Validate the number of places",
+							"pm.test(\"Number of places is 1\", () => {",
+							"    pm.expect(jsonData.places.length).to.eql(1);",
+							"});",
+							"",
+							"// Validate the sum of distances",
+							"const totalDistance = jsonData.distances.reduce((sum, distance) => sum + distance, 0);",
+							"pm.test(\"Sum of distances is 35\", () => {",
+							"    pm.expect(totalDistance).to.eql(35);",
+							"});",
+							"",
+							"// Log results",
+							"console.log(\"Number of places:\", jsonData.places.length);",
+							"console.log(\"Sum of distances:\", totalDistance);"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "cfecb036-20f8-4e6c-96e6-0ed66ebf60dd",
+						"exec": [
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"id": "823dc284-c5c5-4186-9c0e-13d8d686403f",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"requestType\"    : \"near\",\n  \"place\"          : {\"latitude\":\"-89.5\", \"longitude\":\"180\"},\n  \"distance\"       : 50,\n  \"earthRadius\"    : 3959,\n  \"formula\"        : \"vincenty\",\n  \"limit\"          : 100\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BASE_URL}}/api/near",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"api",
+						"near"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "dampierj: near_distances_test",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Response is HTTP200 status\", () => {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Places has less than or equal to limit items\", function () {",
+							"    pm.expect(pm.response.json().places.length).to.be.below(pm.response.json().limit + 1);",
+							"});",
+							"",
+							"pm.test(\"Distances has same amount of items as places\", function () {",
+							"    pm.expect(pm.response.json().places.length).to.eql(pm.response.json().distances.length);",
+							"});",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"id": "d4edec65-e6ca-4380-a6ff-894971e5f9fd",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"requestType\": \"near\",\n    \"place\": {\"latitude\": \"39.7294\", \"longitude\": \"-104.8319\"},\n    \"distance\": 10,\n    \"earthRadius\": 6371,\n    \"limit\": 3\n}\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BASE_URL}}/api/near",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"api",
+						"near"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "dampierj: find_test_type",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Response is HTTP200 status\", () => {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"pm.test(\"Places has less than or equal to limit items\", function () {",
+							"    pm.expect(pm.response.json().places.length).to.be.below(pm.response.json().limit + 1);",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"id": "dd86adc9-59e8-479e-a882-729a6434f258",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"requestType\"    : \"find\",\n  \"match\"          : \"justin\",\n  \"type\"           : [\"airport\", \"other\"],\n  \"limit\"          : 50\n}\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BASE_URL}}/api/find",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"api",
+						"find"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "quintenr: highlimittest_find",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "b3614839-e07c-496d-856b-5de1aac77054",
+						"exec": [
+							"pm.test(\"Response is HTTP200 status\", () => {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Places doesn't exceed limit\", function () {\r",
+							"    pm.expect(pm.response.json().places.length).to.be.below(pm.response.json().limit + 1);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response is not null\", () => {\r",
+							"    pm.expect(pm.response).to.not.be.null;\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"id": "b509b87e-1a04-434e-a0bb-1a0dcb7eeefb",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\t\"requestType\": \"find\",\r\n\t\"match\": \"Air\",\r\n\t\"limit\": 50\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BASE_URL}}/api/find",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"api",
+						"find"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "quintenr: highlimittest_near",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "cda5692b-4d3d-4ba6-afc2-8460485f5b91",
+						"exec": [
+							"pm.test(\"Response is HTTP200 status\", () => {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response is not null\", () => {\r",
+							"    pm.expect(pm.response).to.not.be.null;\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"id": "309213f9-2f21-4297-9716-74c14a3710c3",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"requestType\": \"near\",\r\n    \"place\": {\"latitude\": \"30.328367\", \"longitude\": \"-81.656914\"},\r\n    \"distance\": 50,\r\n    \"earthRadius\": 6371,\r\n    \"limit\": 50\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BASE_URL}}/api/near",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"api",
+						"near"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
